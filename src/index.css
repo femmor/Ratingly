@@ -145,10 +145,19 @@ input:focus {
   cursor: pointer;
   background: none;
   border: none;
+  font-size: 18px;
+}
+
+.close .fa:hover {
+  color: #a10303;
 }
 
 .edit {
   right: 40px;
+}
+
+.edit .fa:hover {
+  color: #5c5e29;
 }
 
 .btn {

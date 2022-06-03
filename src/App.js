@@ -6,11 +6,19 @@ import RatingData from './data/RatingData';
 const App = () => {
   const [ratingItems, setRatingItems] = useState(RatingData);
 
+  // Delete rating
+  const deleteRating = id => {
+    // confirm delete
+    if (window.confirm('Are you sure you want to delete this rating?')) {
+      setRatingItems(ratingItems.filter(rating => rating.id !== id));
+    }
+  };
+
   return (
     <>
       <Header />
       <div className="container">
-        <RatingList ratingItems={ratingItems} />
+        <RatingList ratingItems={ratingItems} deleteRating={deleteRating} />
       </div>
     </>
   );

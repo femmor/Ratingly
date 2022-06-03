@@ -1,6 +1,6 @@
 import RatingItem from './RatingItem';
 
-const RatingList = ({ ratingItems }) => {
+const RatingList = ({ ratingItems, deleteRating }) => {
   // Check to see o=if there are any ratings
   if (!ratingItems || ratingItems.length === 0) {
     return <p>No Ratings Yet!</p>;
@@ -9,7 +9,11 @@ const RatingList = ({ ratingItems }) => {
   return (
     <div className="rating-list">
       {ratingItems.map(ratingItem => (
-        <RatingItem key={ratingItem.id} ratingItem={ratingItem} />
+        <RatingItem
+          key={ratingItem.id}
+          ratingItem={ratingItem}
+          handleDelete={deleteRating}
+        />
       ))}
     </div>
   );
