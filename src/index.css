@@ -8,7 +8,7 @@
 
 body {
   font-family: 'Poppins', sans-serif;
-  background-color: #1b2021;
+  background-color: #51513d;
   color: #fff;
   line-height: 1.6;
 }
@@ -30,6 +30,12 @@ header {
   justify-content: space-between;
   align-items: center;
   margin-bottom: 30px;
+}
+
+header h2 {
+  font-size: 2rem;
+  font-weight: 600;
+  margin: 0;
 }
 
 .card {
@@ -156,7 +162,7 @@ input:focus {
 }
 
 .btn-primary {
-  background-color: #1b2021;
+  background-color: #51513d;
 }
 
 .btn-secondary {
