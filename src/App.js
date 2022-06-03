@@ -1,6 +1,8 @@
 import { useState } from 'react';
 import Header from './components/Header';
+import RatingForm from './components/RatingForm';
 import RatingList from './components/RatingList';
+import RatingStats from './components/RatingStats';
 import RatingData from './data/RatingData';
 
 const App = () => {
@@ -18,6 +20,8 @@ const App = () => {
     <>
       <Header />
       <div className="container">
+        <RatingForm />
+        <RatingStats ratingItems={ratingItems} />
         <RatingList ratingItems={ratingItems} deleteRating={deleteRating} />
       </div>
     </>
