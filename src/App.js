@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { v4 as uuidv4 } from 'uuid';
 import Header from './components/Header';
 import RatingForm from './components/RatingForm';
 import RatingList from './components/RatingList';
@@ -16,11 +17,17 @@ const App = () => {
     }
   };
 
+  // Add rating
+  const addRating = rating => {
+    rating.id = uuidv4();
+    setRatingItems([rating, ...ratingItems]);
+  };
+
   return (
     <>
       <Header />
       <div className="container">
-        <RatingForm />
+        <RatingForm addRating={addRating} />
         <RatingStats ratingItems={ratingItems} />
         <RatingList ratingItems={ratingItems} deleteRating={deleteRating} />
       </div>
