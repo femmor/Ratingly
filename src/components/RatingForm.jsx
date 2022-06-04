@@ -1,9 +1,13 @@
-import { useState } from 'react';
+import { useContext, useState } from 'react';
+import RatingContext from '../context/RatingContext';
 import RatingSelect from './RatingSelect';
 import Button from './shared/Button';
 import Card from './shared/Card';
 
-const RatingForm = ({ ratingItems, addRating }) => {
+const RatingForm = () => {
+  // Get addRating from the context
+  const { addRating } = useContext(RatingContext);
+
   const [text, setText] = useState('');
   const [rating, setRating] = useState(null);
   const [btnDisabled, setBtnDisabled] = useState(true);

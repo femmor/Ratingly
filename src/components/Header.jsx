@@ -1,10 +1,14 @@
+import { Link } from 'react-router-dom';
+
 const Header = ({ text, textColor, bgColor }) => {
   const headerStyle = { color: textColor, backgroundColor: bgColor };
 
   return (
     <header style={headerStyle}>
       <div className="container">
-        <h2>{text}</h2>
+        <Link to="/">
+          <h2>{text}</h2>
+        </Link>
       </div>
     </header>
   );

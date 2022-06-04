@@ -1,4 +1,10 @@
-const RatingStats = ({ ratingItems }) => {
+import { useContext } from 'react';
+import RatingContext from '../context/RatingContext';
+
+const RatingStats = () => {
+  // Get the ratingItems from the context
+  const { ratingItems } = useContext(RatingContext);
+
   // Calculate average rating
   let average =
     ratingItems.reduce((acc, curr) => acc + curr.rating, 0) /
