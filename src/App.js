@@ -1,10 +1,12 @@
 import { useState } from 'react';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import { v4 as uuidv4 } from 'uuid';
 import Header from './components/Header';
 import RatingForm from './components/RatingForm';
 import RatingList from './components/RatingList';
 import RatingStats from './components/RatingStats';
 import RatingData from './data/RatingData';
+import AboutPage from './pages/AboutPage';
 
 const App = () => {
   const [ratingItems, setRatingItems] = useState(RatingData);
@@ -24,14 +26,28 @@ const App = () => {
   };
 
   return (
-    <>
+    <Router>
       <Header />
       <div className="container">
-        <RatingForm addRating={addRating} />
-        <RatingStats ratingItems={ratingItems} />
-        <RatingList ratingItems={ratingItems} deleteRating={deleteRating} />
+        <Routes>
+          <Route
+            path="/"
+            exact
+            element={
+              <>
+                <RatingForm addRating={addRating} />
+                <RatingStats ratingItems={ratingItems} />
+                <RatingList
+                  ratingItems={ratingItems}
+                  deleteRating={deleteRating}
+                />
+              </>
+            }
+          />
+          <Route exact path="/about" element={<AboutPage />} />
+        </Routes>
       </div>
-    </>
+    </Router>
   );
 };
 
