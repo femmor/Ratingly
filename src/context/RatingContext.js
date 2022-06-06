@@ -1,26 +1,25 @@
-import { createContext, useState } from 'react';
+import { createContext, useEffect, useState } from 'react';
 import { v4 as uuidv4 } from 'uuid';
 
 const RatingContext = createContext();
 
 export const RatingProvider = ({ children }) => {
-  const [ratingItems, setRatingItems] = useState([
-    {
-      id: 1,
-      text: 'This is item 1 from context API',
-      rating: 3,
-    },
-    {
-      id: 2,
-      text: 'This is item 2 from context API',
-      rating: 6,
-    },
-    {
-      id: 3,
-      text: 'This is item 3 from context API',
-      rating: 10,
-    },
-  ]);
+  const [ratingItems, setRatingItems] = useState([]);
+  const [isLoading, setIsLoading] = useState(true);
+
+  // Fetch ratings from backend
+  const fetchRatings = async () => {
+    const response = await fetch(
+      'http://localhost:5000/ratings?_sort=id&_order=asc'
+    );
+    const data = await response.json();
+    setRatingItems(data);
+    setIsLoading(false);
+  };
+
+  useEffect(() => {
+    fetchRatings();
+  }, []);
 
   const [ratingEdit, setRatingEdit] = useState({
     item: {},
@@ -71,6 +70,7 @@ export const RatingProvider = ({ children }) => {
         editRating,
         ratingEdit,
         updateRating,
+        isLoading,
       }}
     >
       {children}
