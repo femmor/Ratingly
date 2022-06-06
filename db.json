@@ -1,3 +1,9 @@
 {
-  "ratings": []
+  "ratings": [
+    {
+      "text": "This is a test rating added to the json-server backend",
+      "rating": 9,
+      "id": 1
+    }
+  ]
 }

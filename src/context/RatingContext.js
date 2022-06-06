@@ -1,5 +1,4 @@
 import { createContext, useEffect, useState } from 'react';
-import { v4 as uuidv4 } from 'uuid';
 
 const RatingContext = createContext();
 
@@ -9,9 +8,7 @@ export const RatingProvider = ({ children }) => {
 
   // Fetch ratings from backend
   const fetchRatings = async () => {
-    const response = await fetch(
-      'http://localhost:5000/ratings?_sort=id&_order=asc'
-    );
+    const response = await fetch('/ratings?_sort=id&_order=asc');
     const data = await response.json();
     setRatingItems(data);
     setIsLoading(false);
@@ -27,9 +24,16 @@ export const RatingProvider = ({ children }) => {
   });
 
   // Add rating
-  const addRating = rating => {
-    rating.id = uuidv4();
-    setRatingItems([rating, ...ratingItems]);
+  const addRating = async rating => {
+    const response = await fetch('/ratings', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(rating),
+    });
+    const data = await response.json();
+    setRatingItems([data, ...ratingItems]);
   };
 
   // Delete rating
