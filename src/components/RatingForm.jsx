@@ -63,7 +63,7 @@ const RatingForm = () => {
 
   return (
     <Card>
-      <h2>How would your rate our service?</h2>
+      <h2>How would you rate our service?</h2>
       <RatingSelect select={rating => setRating(rating)} />
       <form onSubmit={handleSubmit}>
         <div className="input-group">
