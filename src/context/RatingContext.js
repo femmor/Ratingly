@@ -5,6 +5,10 @@ const RatingContext = createContext();
 export const RatingProvider = ({ children }) => {
   const [ratingItems, setRatingItems] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
+  const [ratingEdit, setRatingEdit] = useState({
+    item: {},
+    edit: false,
+  });
 
   // Fetch ratings from backend
   const fetchRatings = async () => {
@@ -17,11 +21,6 @@ export const RatingProvider = ({ children }) => {
   useEffect(() => {
     fetchRatings();
   }, []);
-
-  const [ratingEdit, setRatingEdit] = useState({
-    item: {},
-    edit: false,
-  });
 
   // Add rating
   const addRating = async rating => {
@@ -37,9 +36,13 @@ export const RatingProvider = ({ children }) => {
   };
 
   // Delete rating
-  const deleteRating = id => {
+  const deleteRating = async id => {
     // confirm delete
     if (window.confirm('Are you sure you want to delete this rating?')) {
+      await fetch(`/ratings/${id}`, {
+        method: 'DELETE',
+      });
+
       setRatingItems(ratingItems.filter(rating => rating.id !== id));
     }
   };
@@ -53,11 +56,18 @@ export const RatingProvider = ({ children }) => {
   };
 
   // Update rating
-  const updateRating = (id, updRating) => {
+  const updateRating = async (id, updRating) => {
+    const response = await fetch(`/ratings/${id}`, {
+      method: 'PUT',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(updRating),
+    });
+    const data = await response.json();
+
     setRatingItems(
-      ratingItems.map(item =>
-        item.id === id ? { ...item, ...updRating } : item
-      )
+      ratingItems.map(item => (item.id === id ? { ...item, data } : item))
     );
     setRatingEdit({
       item: {},

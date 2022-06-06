@@ -1,9 +1,14 @@
 {
   "ratings": [
     {
-      "text": "This is a test rating added to the json-server backend",
-      "rating": 9,
+      "text": "This is an updated item but it isn't realtime",
+      "rating": 7,
       "id": 1
+    },
+    {
+      "text": "This is a rating of 4 edited",
+      "rating": 4,
+      "id": 2
     }
   ]
 }
