@@ -6,7 +6,7 @@ import Card from './shared/Card';
 
 const RatingForm = () => {
   // Get addRating from the context
-  const { addRating, ratingEdit } = useContext(RatingContext);
+  const { addRating, ratingEdit, updateRating } = useContext(RatingContext);
 
   const [text, setText] = useState('');
   const [rating, setRating] = useState(null);
@@ -49,7 +49,12 @@ const RatingForm = () => {
         rating,
       };
 
-      addRating(newRating);
+      // Edit rating / add rating
+      if (ratingEdit.edit === true) {
+        updateRating(ratingEdit.item.id, newRating);
+      } else {
+        addRating(newRating);
+      }
     }
 
     setText('');

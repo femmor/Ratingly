@@ -49,6 +49,19 @@ export const RatingProvider = ({ children }) => {
     });
   };
 
+  // Update rating
+  const updateRating = (id, updRating) => {
+    setRatingItems(
+      ratingItems.map(item =>
+        item.id === id ? { ...item, ...updRating } : item
+      )
+    );
+    setRatingEdit({
+      item: {},
+      edit: false,
+    });
+  };
+
   return (
     <RatingContext.Provider
       value={{
@@ -57,6 +70,7 @@ export const RatingProvider = ({ children }) => {
         deleteRating,
         editRating,
         ratingEdit,
+        updateRating,
       }}
     >
       {children}
