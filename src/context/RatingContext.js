@@ -7,10 +7,25 @@ export const RatingProvider = ({ children }) => {
   const [ratingItems, setRatingItems] = useState([
     {
       id: 1,
-      text: 'This item is from context API',
+      text: 'This is item 1 from context API',
       rating: 3,
     },
+    {
+      id: 2,
+      text: 'This is item 2 from context API',
+      rating: 6,
+    },
+    {
+      id: 3,
+      text: 'This is item 3 from context API',
+      rating: 10,
+    },
   ]);
+
+  const [ratingEdit, setRatingEdit] = useState({
+    item: {},
+    edit: false,
+  });
 
   // Add rating
   const addRating = rating => {
@@ -26,12 +41,22 @@ export const RatingProvider = ({ children }) => {
     }
   };
 
+  // Edit rating
+  const editRating = rating => {
+    setRatingEdit({
+      item: rating,
+      edit: true,
+    });
+  };
+
   return (
     <RatingContext.Provider
       value={{
         ratingItems,
         addRating,
         deleteRating,
+        editRating,
+        ratingEdit,
       }}
     >
       {children}

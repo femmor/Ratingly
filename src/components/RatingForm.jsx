@@ -1,4 +1,4 @@
-import { useContext, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import RatingContext from '../context/RatingContext';
 import RatingSelect from './RatingSelect';
 import Button from './shared/Button';
@@ -6,12 +6,24 @@ import Card from './shared/Card';
 
 const RatingForm = () => {
   // Get addRating from the context
-  const { addRating } = useContext(RatingContext);
+  const { addRating, ratingEdit } = useContext(RatingContext);
 
   const [text, setText] = useState('');
   const [rating, setRating] = useState(null);
   const [btnDisabled, setBtnDisabled] = useState(true);
   const [message, setMessage] = useState('');
+
+  useEffect(() => {
+    if (ratingEdit.edit === true) {
+      setText(ratingEdit.item.text);
+      setRating(ratingEdit.item.rating);
+      setBtnDisabled(false);
+    } else {
+      setText('');
+      setRating(null);
+      setBtnDisabled(true);
+    }
+  }, [ratingEdit]);
 
   // Text validation real time
   const handleTextChange = e => {
