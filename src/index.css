@@ -234,6 +234,17 @@ input:focus {
   margin: 10px 0;
 }
 
+.no-rating {
+  text-align: center;
+  padding: 20px;
+  font-size: 18px;
+}
+
+.loader {
+  margin: 0 auto;
+  display: block;
+}
+
 @media (max-width: 600px) {
   .rating li {
     margin: 10px 3px;
